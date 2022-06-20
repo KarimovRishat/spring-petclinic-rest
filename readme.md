@@ -1,5 +1,12 @@
 # Spring PetClinic Sample Application [![Build Status](https://github.com/spring-projects/spring-petclinic/actions/workflows/maven-build.yml/badge.svg)](https://github.com/spring-projects/spring-petclinic/actions/workflows/maven-build.yml)
 
+- Для сборки приложения необходимо склонировать соержимое репозитория
+- Дождаться импорта всех необходимых компонентов
+- Запустить сборку билда командой docker buildx build --tag tinkoff-edu-app:1.0.0 .
+- Ввести команду docker compose up
+- ???
+- PROFIT !!!11
+
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/spring-projects/spring-petclinic)
 
 ## Understanding the Spring Petclinic application with a few diagrams
