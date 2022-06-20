@@ -51,8 +51,39 @@ class PetClinicIntegrationTests {
 	@Test
 	void testOwnerDetails() {
 		RestTemplate template = builder.rootUri("http://localhost:" + port).build();
-		ResponseEntity<String> result = template.exchange(RequestEntity.get("/owners/1").build(), String.class);
+		ResponseEntity<String> result = template.exchange(RequestEntity.get("/owners/").build(), String.class);
 		assertThat(result.getStatusCode()).isEqualTo(HttpStatus.OK);
 	}
 
+	@Test
+	void getOwnerByLastName() {
+		RestTemplate template = builder.rootUri("http://localhost:" + port).build();
+		ResponseEntity<String> result = template.exchange(RequestEntity.get("/owners/?lastName=McTavish").build(), String.class);
+		assertThat(result.getStatusCode()).isEqualTo(HttpStatus.OK);
+		assertThat(result.getBody()).contains("\"id\":5");
+	}
+
+	@Test
+	void getOwnerById() {
+		RestTemplate template = builder.rootUri("http://localhost:" + port).build();
+		ResponseEntity<String> result = template.exchange(RequestEntity.get("/owners/2").build(), String.class);
+		assertThat(result.getStatusCode()).isEqualTo(HttpStatus.OK);
+		assertThat(result.getBody()).contains("\"lastName\":\"Davis\"");
+	}
+
+	@Test
+	void getPetsByOwnerId() {
+		RestTemplate template = builder.rootUri("http://localhost:" + port).build();
+		ResponseEntity<String> result = template.exchange(RequestEntity.get("/owners/1/pets").build(), String.class);
+		assertThat(result.getStatusCode()).isEqualTo(HttpStatus.OK);
+		assertThat(result.getBody()).contains("[{\"id\":1,\"name\":\"Leo\",\"birthDate\":\"2010-09-07\",\"visits\":[],\"new\":false}]");
+	}
+
+	@Test
+	void getVets() {
+		RestTemplate template = builder.rootUri("http://localhost:" + port).build();
+		ResponseEntity<String> result = template.exchange(RequestEntity.get("/owners/6/pets/8/visits").build(), String.class);
+		assertThat(result.getStatusCode()).isEqualTo(HttpStatus.OK);
+		assertThat(result.getBody()).isNotEmpty();
+	}
 }

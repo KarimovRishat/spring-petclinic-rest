@@ -17,7 +17,7 @@ services:
   db:
     image: postgres:14.3-alpine
     ports:
-      - "5432:5432"
+      - "6432:5432"
     networks:
       app:
     environment:
